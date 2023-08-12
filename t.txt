@@ -1,0 +1,76 @@
+sudo chmod 666 /var/run/docker.sock
+docker build -t {name of image} => for image name
+
+docker run -d --name nodecontainer nodeapp
+docker run -d -p 3000(host):3000(client) --name nodecontainer nodeapp
+docker run -d -v {pathofmachine}:{pathofcontainer} -p 3000(host):3000(client) --name nodecontainer nodeapp
+docker exec -it nodecontainer sh
+
+docker run -d -v $(pwd):/app -v /app/node_modules -p 3000:3000 --name nodecontainer nodeapp
+docker run -d -v $(pwd):/app:ro -v /app/node_modules -p 3000:3000 --name nodecontainer nodeapp
+docker run -d --env PORT=4000 -v $(pwd):/app:ro -v /app/node_modules -p 3000:4000 --name nodecontainer nodeapp
+docker run -d --env-file ./.env -v $(pwd):/app:ro -v /app/node_modules -p 3000:4000 --name nodecontainer nodeapp
+
+docker volume ls
+docker volume prune
+
+docker rm nodecontainer -fv
+
+docker-compose up -d
+
+-f => file
+docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d
+
+docker inspect 
+docker network ls
+
+-V for new volume
+--no-deps
+docker watchtower for auto pull
+docker run -d --name watchtower -e WATCTOWER_TRACT=true -e WATCHTOWER_DEBUG=true -e WATCH_TOWER_POOL_INTERVARL=50 -v /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower
+
+docker sawrm
+node-app:
+    deploy:
+      replicas: 8
+      restart_policy:
+        condition: any
+      update_config:
+        parallelism: 2
+        delay: 15s
+        
+ssh -i ~/.minikube/machines/minikube/id_rsa docker@$(minikube ip)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+redis-server
+redis-cli
+del set get exists
+flushall 
+KEYS *
+ttl = time to live
+expire name 10
+setex name 10 kyle
+lpush freinds john => left array
+lrange freinds 0 -1
+rpush lpop rpop
+SADD hobiies "asdasd"
+SMEMBERS => print sets
+SREM hobbies "asdsa" => remove
+HSET = > hash no nest
+
